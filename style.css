@@ -1,0 +1,856 @@
+/* Change these colors to give the interface a different theme. */
+:root {
+  --ink: #183c32;
+  --muted: #68776a;
+  --paper: #f8f6ef;
+  --green: #dce9b3;
+  --yellow: #f7cd58;
+  --line: #d8ddcf;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  font-weight: 700;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: transparent;
+  padding: 14px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+}
+
+button:hover {
+  background: #e9eddf;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+button:focus-visible,
+a:focus-visible,
+canvas:focus-visible {
+  outline: 3px solid #d58b2d;
+  outline-offset: 4px;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.primary:hover {
+  background: #2c5746;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Header */
+.site-header {
+  max-width: 1280px;
+  margin: auto;
+  padding: 28px 42px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.site-header a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+.brand-icon {
+  background: var(--ink);
+  color: var(--yellow);
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 28px;
+}
+
+.brand-sub {
+  font-size: 9px;
+  letter-spacing: 2px;
+  width: 60px;
+  line-height: 1.5;
+}
+
+.edition,
+footer,
+.eyebrow,
+.art-label,
+.art-note,
+.record > span,
+.stat > span,
+.route-tag,
+.control-hint,
+.preview-card > span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+}
+
+.edition {
+  color: var(--muted);
+}
+
+.wallet {
+  border-radius: 24px;
+  background: #efecd8;
+  padding: 10px 17px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wallet:first-letter {
+  color: #c08d20;
+}
+
+main {
+  max-width: 1196px;
+  margin: auto;
+  padding: 48px 0;
+}
+
+/* Main menu */
+.menu-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.menu-copy {
+  padding: 16px 0;
+}
+
+.eyebrow {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: clamp(48px, 5.5vw, 76px);
+  letter-spacing: -4px;
+  line-height: 1.04;
+  margin: 0 0 25px;
+  font-weight: 800;
+}
+
+h1 em {
+  font-style: normal;
+  position: relative;
+  display: inline-block;
+}
+
+h1 em::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: -3px;
+  right: -8px;
+  height: 12px;
+  background: var(--yellow);
+  z-index: -1;
+  transform: rotate(-3deg);
+}
+
+.intro {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.big {
+  width: 260px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  padding: 19px 22px;
+}
+
+.menu-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.menu-links button {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 13px 0;
+  margin-right: 18px;
+  font-size: 12px;
+  display: flex;
+  gap: 13px;
+}
+
+.record {
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.record > span {
+  color: var(--muted);
+}
+
+.record strong {
+  font-size: 27px;
+}
+
+.record small {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.menu-art {
+  border-radius: 20px;
+  background: #dce8bb;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #cbd6b3;
+  box-shadow: 0 14px 30px #183c3209;
+}
+
+.art-label {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  z-index: 1;
+  color: #456447;
+}
+
+#scene {
+  width: 100%;
+  display: block;
+}
+
+.art-note {
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  right: 24px;
+  background: #f8f6efed;
+  padding: 16px;
+  border-radius: 9px;
+  letter-spacing: .5px;
+  display: flex;
+  gap: 14px;
+}
+
+.art-note span {
+  color: #ae8734;
+}
+
+footer {
+  max-width: 1196px;
+  margin: auto;
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+h2 {
+  font-size: 40px;
+  letter-spacing: -1.5px;
+  margin: 0 0 14px;
+}
+
+h3 {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+
+/* Gameplay */
+.game-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.game-heading .eyebrow {
+  margin-bottom: 10px;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 576px) 1fr;
+  gap: 40px;
+  max-width: 940px;
+  margin: auto;
+}
+
+.canvas-wrap {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #a8ca7b;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  touch-action: none;
+}
+
+.route-panel {
+  padding: 10px 0;
+}
+
+.route-tag {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat > span {
+  color: var(--muted);
+}
+
+.stat strong {
+  font-size: 35px;
+}
+
+.stat small {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.mission {
+  margin-top: 25px;
+  background: #efecd9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.mission .eyebrow {
+  margin-bottom: 12px;
+}
+
+.mission p {
+  font-size: 14px;
+}
+
+.mission small {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+progress {
+  width: 100%;
+  height: 7px;
+  margin-bottom: 14px;
+  accent-color: var(--ink);
+}
+
+.shield {
+  font-size: 13px;
+  padding-top: 22px;
+}
+
+#route-message {
+  font-size: 12px;
+  line-height: 1.6;
+  min-height: 36px;
+  color: var(--muted);
+}
+
+.controls {
+  text-align: center;
+}
+
+.controls button {
+  background: #eeefe4;
+  width: 52px;
+  height: 46px;
+  padding: 8px;
+  font-size: 22px;
+  touch-action: none;
+}
+
+.controls > button {
+  margin-bottom: 5px;
+}
+
+.controls > div {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.control-hint {
+  text-align: center;
+  font-size: 9px;
+  line-height: 1.9;
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+/* Pause and game-over overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: #f8f6eff2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  gap: 10px;
+}
+
+.overlay h2 {
+  font-size: 42px;
+}
+
+.overlay p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.overlay button {
+  min-width: 210px;
+}
+
+#results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+#results strong {
+  display: block;
+  font-size: 30px;
+}
+
+#results span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Shops and instructions */
+.settings {
+  max-width: 940px;
+  margin: 20px auto 60px;
+}
+
+.settings > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.closet-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 50px;
+  margin: 36px 0;
+}
+
+.preview-card {
+  background: var(--green);
+  border-radius: 15px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.preview-card canvas {
+  width: 100%;
+}
+
+.preview-card > span {
+  display: block;
+  font-size: 8px;
+  margin-bottom: 24px;
+}
+
+h3 small {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-left: 12px;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 26px;
+}
+
+.choices button {
+  background: #fff;
+  padding: 14px;
+}
+
+.choices button.selected {
+  border: 2px solid var(--ink);
+  background: #e8eddd;
+}
+
+.swatch {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: middle;
+}
+
+.hats button {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 95px;
+}
+
+.hats small {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+#shop-message,
+#upgrade-message {
+  font-size: 13px;
+  min-height: 20px;
+  color: var(--muted);
+}
+
+.upgrade-card {
+  display: flex;
+  gap: 35px;
+  background: #e7ecd8;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 40px;
+  margin: 30px 0;
+}
+
+.shield-art {
+  font-size: 100px;
+  color: #458a96;
+  align-self: center;
+}
+
+.upgrade-card p {
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 530px;
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin: 35px 0;
+}
+
+.help-grid article {
+  padding: 24px;
+  background: #ecefdf;
+  border-radius: 12px;
+}
+
+.help-grid article > span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.help-grid h3 {
+  margin-top: 18px;
+}
+
+.help-grid p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.warning {
+  background: #fff1c7;
+  color: #654b16;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+/* Responsive layout */
+@media (min-width: 1500px) {
+  main {
+    padding-top: 70px;
+  }
+}
+
+@media (max-width: 1250px) {
+  main,
+  footer {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+}
+
+@media (max-width: 800px) {
+  .edition {
+    display: none;
+  }
+
+  .site-header {
+    padding: 20px 24px;
+  }
+
+  .menu-layout {
+    gap: 25px;
+  }
+
+  .menu-links {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  .game-layout {
+    gap: 24px;
+    grid-template-columns: minmax(280px, 1fr) 235px;
+  }
+
+  .closet-layout {
+    gap: 25px;
+    grid-template-columns: 240px 1fr;
+  }
+
+  .stat {
+    padding: 14px 0;
+  }
+
+  .mission {
+    padding: 14px;
+  }
+
+  .menu-art {
+    align-self: center;
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 28px 0;
+    margin: 0 20px;
+  }
+
+  .site-header {
+    padding: 16px 20px;
+  }
+
+  .site-header a {
+    font-size: 18px;
+  }
+
+  .brand-sub {
+    font-size: 7px;
+  }
+
+  .wallet {
+    font-size: 11px;
+    padding: 9px 12px;
+  }
+
+  .menu-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-copy {
+    padding-top: 8px;
+  }
+
+  h1 {
+    font-size: 57px;
+  }
+
+  .menu-art {
+    max-height: 420px;
+  }
+
+  .menu-art canvas {
+    margin-top: -45px;
+  }
+
+  .record {
+    margin-top: 24px;
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .game-heading h2 {
+    font-size: 30px;
+  }
+
+  .game-heading .eyebrow {
+    font-size: 8px;
+  }
+
+  .game-heading button {
+    padding: 11px;
+  }
+
+  .route-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .route-tag {
+    grid-column: 1 / -1;
+    padding-bottom: 10px;
+  }
+
+  .stat {
+    padding: 5px 0;
+  }
+
+  .stat strong {
+    font-size: 27px;
+  }
+
+  .mission {
+    margin: 0;
+    grid-column: 1 / -1;
+  }
+
+  .shield {
+    padding-top: 8px;
+  }
+
+  #route-message {
+    margin: 6px 0;
+  }
+
+  /* Phone controls remain within reach while route details scroll. */
+  .controls {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    background: #f8f6eff5;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px #183c3220;
+  }
+
+  .control-hint {
+    grid-column: 1 / -1;
+    margin: 0;
+  }
+
+  .closet-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-card {
+    max-width: 220px;
+  }
+
+  .help-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upgrade-card {
+    padding: 24px;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .shield-art {
+    font-size: 60px;
+  }
+
+  footer {
+    margin: 30px 20px 0;
+    gap: 20px;
+    line-height: 1.6;
+    font-size: 7px;
+  }
+
+  body:has(#play-screen:not([hidden])) footer {
+    padding-bottom: 130px;
+  }
+
+  .overlay h2 {
+    font-size: 32px;
+  }
+
+  .settings {
+    margin-top: 10px;
+  }
+}

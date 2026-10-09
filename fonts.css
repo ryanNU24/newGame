@@ -1,0 +1,116 @@
+/* Pixel font for the interface */
+html:root body,
+html:root body button,
+html:root body input,
+html:root body select,
+html:root body textarea,
+html:root body .hopper-mixer {
+  font-family: "Press Start 2P", system-ui !important;
+  font-weight: 400 !important;
+  font-style: normal;
+  font-synthesis: none;
+}
+
+html:root body {
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* Main menu title */
+html:root body .menu-copy h1 {
+  font-size: clamp(24px, 3.4vw, 42px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+html:root body .menu-copy h1 em {
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Section headings */
+html:root body h2 {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+html:root body h3 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* Buttons */
+html:root body button {
+  font-size: 10px !important;
+  letter-spacing: 0;
+  line-height: 1.8;
+  white-space: normal;
+  min-height: 44px;
+}
+
+html:root body button.primary,
+html:root body #play {
+  font-size: 12px !important;
+}
+
+/* Direction buttons */
+html:root body .controls button {
+  font-size: 20px !important;
+}
+
+/* Header */
+html:root body .site-header {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+html:root body .site-header a {
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+html:root body .brand-sub {
+  font-size: 8px;
+  letter-spacing: 0;
+}
+
+/* Descriptions */
+html:root body .intro,
+html:root body .help-grid p,
+html:root body .overlay p,
+html:root body .mission p,
+html:root body .hopper-mixer p {
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+/* Compact score labels */
+html:root body .stat > span,
+html:root body .record > span,
+html:root body .control-hint {
+  font-size: 8px;
+  letter-spacing: 0;
+  line-height: 1.8;
+}
+
+/* Allow audio preview buttons to wrap */
+html:root body .mixer-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  html:root body .menu-copy h1 {
+    font-size: 26px;
+    letter-spacing: 0;
+  }
+
+  html:root body h2 {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172e2a">
+  <title>Delivery Hopper</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+  <script src="sound.js" defer></script>
+  <script src="theme.js" defer></script>
+  <script src="school-theme.js" defer></script>
+  <script src="graphics.js" defer></script>
+  <script src="controls.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+  href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+  rel="stylesheet"
+>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="background.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="#" id="home-link" aria-label="Delivery Hopper main menu">
+      <span class="brand-icon">→</span>
+      HOPPER
+      <span class="brand-sub">COURIER CLUB</span>
+    </a>
+    <span class="edition">SPECIAL DELIVERY · NO. 001</span>
+    <span class="wallet">● <span id="wallet">0</span> coins</span>
+  </header>
+
+  <main>
+    <div id="storage-warning" class="warning" role="status" hidden>
+      Browser storage is unavailable. You can play, but progress cannot be saved.
+    </div>
+
+    <!-- Main menu -->
+    <section id="menu" class="screen menu-layout">
+      <div class="menu-copy">
+        <span class="eyebrow">A LITTLE HOP. A BIG ADVENTURE.</span>
+        <h1>Good things<br>come to those<br>who <em>hop.</em></h1>
+        <p class="intro">
+          Busy streets. Precious parcels. One brave little courier.<br>
+          Make your next delivery, one hop at a time.
+        </p>
+
+        <button id="play" class="primary big">
+          Let’s deliver <span>→</span>
+        </button>
+
+        <div class="menu-links">
+          <button id="customize">Customize <span>→</span></button>
+          <button id="upgrades">Upgrades <span>→</span></button>
+          <button id="how">How to play <span>→</span></button>
+        </div>
+
+        <div class="record">
+          <span>YOUR PERSONAL BEST</span>
+          <strong><span id="menu-best">0</span> <small>rows</small></strong>
+        </div>
+      </div>
+
+      <div class="menu-art">
+        <div class="art-label">THE NEIGHBORHOOD IS WAITING</div>
+        <canvas
+          id="scene"
+          width="640"
+          height="680"
+          aria-label="An illustrated courier waiting to cross a colorful neighborhood">
+        </canvas>
+        <div class="art-note">
+          <span>✦</span> Small steps. Special deliveries.
+        </div>
+      </div>
+    </section>
+
+    <!-- Gameplay -->
+    <section id="play-screen" class="screen" hidden>
+      <div class="game-heading">
+        <div>
+          <span class="eyebrow">ON THE CLOCK, AT YOUR OWN PACE</span>
+          <h2>Delivery route</h2>
+        </div>
+        <button id="pause">Pause</button>
+      </div>
+
+      <div class="game-layout">
+        <div class="canvas-wrap">
+          <canvas
+            id="game"
+            width="576"
+            height="640"
+            tabindex="0"
+            aria-label="Delivery Hopper game. Use arrow keys or WASD to hop toward the marked house.">
+          </canvas>
+
+          <div id="game-overlay" class="overlay" hidden>
+            <span class="eyebrow" id="overlay-label">TAKE A BREATHER</span>
+            <h2 id="overlay-title">Route paused</h2>
+            <p id="overlay-text">Your parcels can wait a moment.</p>
+            <div id="results" hidden></div>
+            <button id="resume" class="primary">Keep hopping →</button>
+            <button id="restart" class="primary" hidden>Restart route →</button>
+            <button id="game-menu">Main menu</button>
+          </div>
+        </div>
+
+        <aside class="route-panel">
+          <div class="route-tag">YOUR ROUTE <span>→</span></div>
+
+          <div class="stat">
+            <span>DISTANCE</span>
+            <strong id="distance">0 <small>rows</small></strong>
+          </div>
+
+          <div class="stat">
+            <span>DELIVERIES</span>
+            <strong id="deliveries">0</strong>
+          </div>
+
+          <div class="mission">
+            <span class="eyebrow">CURRENT PACKAGE</span>
+            <h3 id="mission-title">Delivery #1</h3>
+            <p id="mission-distance">15 rows to go</p>
+            <progress id="mission-progress" value="0" max="15"></progress>
+            <small>
+              Find the house with the yellow marker.<br>
+              Deliver before crossing the checkpoint.
+            </small>
+          </div>
+
+          <div id="shield-status" class="shield">◇ Shield not equipped</div>
+          <p id="route-message" role="status">
+            Your first package is ready. Let’s hop!
+          </p>
+
+          <div class="controls" aria-label="Touch movement controls">
+            <button data-move="up" aria-label="Hop forward">↑</button>
+            <div>
+              <button data-move="left" aria-label="Hop left">←</button>
+              <button data-move="down" aria-label="Hop backward">↓</button>
+              <button data-move="right" aria-label="Hop right">→</button>
+            </div>
+          </div>
+
+          <p class="control-hint">
+            ARROWS / WASD TO HOP<br>
+            ESC / P TO PAUSE
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Customization -->
+    <section id="custom-screen" class="screen settings" hidden>
+      <span class="eyebrow">MAKE IT YOUR OWN</span>
+      <h2>Courier closet</h2>
+      <p>A fresh look for your next route. All style, same hop.</p>
+
+      <div class="closet-layout">
+        <div class="preview-card">
+          <canvas
+            id="preview"
+            width="300"
+            height="300"
+            aria-label="Live preview of your courier">
+          </canvas>
+          <span>READY FOR THE NEIGHBORHOOD</span>
+        </div>
+
+        <div>
+          <h3>Pick your shirt <small>ALWAYS FREE</small></h3>
+          <div id="shirts" class="choices"></div>
+
+          <h3>Top it off <small>20 COINS EACH</small></h3>
+          <div id="hats" class="choices hats"></div>
+
+          <p id="shop-message" role="status"></p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="save-custom" class="primary">Save look →</button>
+        <button data-menu>Main menu</button>
+      </div>
+    </section>
+
+    <!-- Shield upgrade -->
+    <section id="upgrade-screen" class="screen settings" hidden>
+      <span class="eyebrow">A LITTLE EXTRA BACKUP</span>
+      <h2>Special equipment</h2>
+      <p>More confidence for those busy intersections.</p>
+
+      <div class="upgrade-card">
+        <div class="shield-art">◇</div>
+        <div>
+          <span class="eyebrow">ONE COLLISION. COVERED.</span>
+          <h3>Parcel shield</h3>
+          <p>
+            Absorbs one hit each run, with a short moment of protection
+            afterward. Restored on every new route.
+          </p>
+          <button id="shield-buy" class="primary">Unlock · 30 coins</button>
+          <p id="upgrade-message" role="status"></p>
+        </div>
+      </div>
+
+      <button data-menu>Main menu</button>
+    </section>
+
+    <!-- Instructions -->
+    <section id="help-screen" class="screen settings" hidden>
+      <span class="eyebrow">YOUR FIRST DAY ON THE ROUTE</span>
+      <h2>How to hop</h2>
+
+      <div class="help-grid">
+        <article>
+          <span>01 / MOVE</span>
+          <h3>One press, one hop.</h3>
+          <p>
+            Use arrow keys, WASD, or the on-screen arrows. Move forward,
+            backward, and sideways. Roads have moving cars; grass gives
+            you a safe place to breathe.
+          </p>
+        </article>
+
+        <article>
+          <span>02 / DELIVER</span>
+          <h3>Follow the yellow marker.</h3>
+          <p>
+            A house awaits every 15 rows. Land on its marked tile to
+            deliver your parcel and earn 10 coins. Complete that delivery
+            before advancing beyond the checkpoint.
+          </p>
+        </article>
+
+        <article>
+          <span>03 / COLLECT</span>
+          <h3>Make every route count.</h3>
+          <p>
+            Each new furthest row earns one distance point. Coins are
+            yours to keep even after a crash. Spend them on hats or a
+            one-hit shield.
+          </p>
+        </article>
+
+        <article>
+          <span>04 / BREATHE</span>
+          <h3>No rush. No timer.</h3>
+          <p>
+            Use Pause, P, or Escape to pause and resume. Switching tabs
+            pauses automatically. Traffic gets a little faster after
+            each delivery, up to a safe limit.
+          </p>
+        </article>
+      </div>
+
+      <button data-menu class="primary">Got it →</button>
+    </section>
+  </main>
+
+  <footer>
+    <span>A SMALL GAME FOR BIG LITTLE ADVENTURES</span>
+    <span>KEEP HOPPING. KEEP DELIVERING. →</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* Allow the wallpaper to show behind the interface. */
+html:root body {
+  isolation: isolate;
+  min-height: 100vh;
+  background: transparent !important;
+}
+
+/* Background layers */
+html:root body::before,
+html:root body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+}
+
+/* Slightly blurred, muted picture */
+html:root body::before {
+  inset: -12px;
+  z-index: -2;
+
+  background-image: url("./background-day.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  filter: blur(4px) saturate(0.65);
+}
+
+/* Soft daytime tint keeps the picture subtle. */
+html:root body::after {
+  inset: 0;
+  z-index: -1;
+  background: rgba(248, 250, 255, 0.82);
+}
+
+/* Dark mode */
+html:root[data-theme="dark"] body {
+  background: transparent !important;
+}
+
+html:root[data-theme="dark"] body::before {
+  background-image: url("./background-night.jpg");
+}
+
+html:root[data-theme="dark"] body::after {
+  background: rgba(5, 12, 28, 0.76);
+}
